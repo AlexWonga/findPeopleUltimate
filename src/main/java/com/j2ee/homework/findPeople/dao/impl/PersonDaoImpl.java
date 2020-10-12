@@ -7,12 +7,15 @@ import com.j2ee.homework.findPeople.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author wong
  */
+
+@Repository("PersonDao")
 public class PersonDaoImpl implements personDao {
 
     @Override
@@ -38,7 +41,16 @@ public class PersonDaoImpl implements personDao {
 
     @Override
     public Person getPersonByName(String username) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        String hql = "from Person where name=?";
+        Query query = session.createQuery(hql);
+        query.setParameter(0,username);
+        List<Person> list = query.list();
+        if(list.isEmpty()){
+            return null;
+        } else {
+            return list.get(0);
+        }
     }
 
 

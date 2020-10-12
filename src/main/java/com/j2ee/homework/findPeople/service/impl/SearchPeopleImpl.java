@@ -4,12 +4,16 @@ import com.j2ee.homework.findPeople.dao.ResponseDB;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.service.SearchPeople;
 import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class SearchPeopleImpl implements SearchPeople {
+    @Autowired
+    PersonDaoImpl personDao;
+
     @Override
     public List<Person> searchPeople(String keyword) {
         if (keyword.equals("")) {
@@ -34,6 +38,11 @@ public class SearchPeopleImpl implements SearchPeople {
 
     @Override
     public Person login(String username, String password) {
-        return null;
+        Person person = personDao.getPersonByName(username);
+        if(person.getPassword().equals(password)){
+            return person;
+        } else {
+            return null;
+        }
     }
 }
