@@ -8,5 +8,6 @@ import java.util.List;
  * @author wong
  */
 public interface SearchPeople {
-    ResponseServer<List<Person>> searchPeople(String keyword);
+    List<Person> searchPeople(String keyword);
+    Person login(String username,String password);
 }

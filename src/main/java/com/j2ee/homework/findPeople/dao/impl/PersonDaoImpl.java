@@ -1,6 +1,8 @@
 package com.j2ee.homework.findPeople.dao.impl;
+import com.j2ee.homework.findPeople.dao.ResponseDB;
 import com.j2ee.homework.findPeople.dao.personDao;
 import com.j2ee.homework.findPeople.pojo.Person;
+import com.j2ee.homework.findPeople.pojo.RegisterPerson;
 import com.j2ee.homework.findPeople.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -33,4 +35,11 @@ public class PersonDaoImpl implements personDao {
         }
         return null;
     }
+
+    @Override
+    public Person getPersonByName(String username) {
+        return null;
+    }
+
+
 }

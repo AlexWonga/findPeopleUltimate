@@ -1,18 +1,19 @@
 package com.j2ee.homework.findPeople.service.impl;
 
+import com.j2ee.homework.findPeople.dao.ResponseDB;
 import com.j2ee.homework.findPeople.pojo.Person;
-import com.j2ee.homework.findPeople.service.ResponseServer;
 import com.j2ee.homework.findPeople.service.SearchPeople;
 import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class SearchPeopleImpl implements SearchPeople {
     @Override
-    public ResponseServer<List<Person>> searchPeople(String keyword) {
+    public List<Person> searchPeople(String keyword) {
         if (keyword.equals("")) {
-            return new ResponseServer<>(false, "invalidKeyword", null);
+            return null;
         } else {
             PersonDaoImpl personDao = new PersonDaoImpl();
             List<Person> personList = personDao.getPersonList();
@@ -27,7 +28,12 @@ public class SearchPeopleImpl implements SearchPeople {
                     resultData.add(person);
                 }
             }
-            return new ResponseServer<>(true, "searchSuccessful", resultData);
+           return resultData;
         }
+    }
+
+    @Override
+    public Person login(String username, String password) {
+        return null;
     }
 }
