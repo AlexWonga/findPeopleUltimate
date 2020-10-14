@@ -1,6 +1,7 @@
 package com.j2ee.homework.findPeople.controller;
 
 
+import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.pojo.ResponseBody;
 import com.j2ee.homework.findPeople.service.SearchPeople;
@@ -12,17 +13,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author wong
  */
 @RestController
 public class SearchPeopleController {
-    @Autowired
-    SearchPeople searchPeopleService;
+//    @Autowired
+//    SearchPeople searchPeopleService;
     @RequestMapping(value = "/searchPeople",method = RequestMethod.GET)
-    public ResponseBody<List<Person>> search(@RequestParam String keyword){
+    public ResponseBody<List<Person>> search(@RequestParam String keyword) {
+        System.out.println(keyword);
+        SearchPeople searchPeopleService = new SearchPeopleImpl();
         List<Person> list = searchPeopleService.searchPeople(keyword);
-        return new ResponseBody<>(200,"searchSuccess",list);
+        if(Objects.isNull(list)) {
+            return new ResponseBody<>(200, "searchSuccess", null);
+        } else {
+            return new ResponseBody<>(200, "searchSuccess", list);
+        }
     }
 }

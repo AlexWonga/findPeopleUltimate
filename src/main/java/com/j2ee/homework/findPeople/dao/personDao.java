@@ -7,4 +7,5 @@ import java.util.List;
 public interface personDao {
     List<Person> getPersonList();
     Person getPersonByName(String username);
+//    List<Person> searchPeople(String keyword);
 }

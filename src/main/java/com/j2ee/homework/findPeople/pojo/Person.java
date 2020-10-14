@@ -1,24 +1,63 @@
 package com.j2ee.homework.findPeople.pojo;
-import javax.persistence.*;
 
-import com.sun.javafx.beans.IDProperty;
-import lombok.Data;
-
-//学号或者教工号（唯一），姓名（允许重名），电话号码（唯一），QQ（可以没有），
-// 邮箱（可以没有）。
-@Entity
-@Table(name="person")
-@Data
 public class Person {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private long ID;//学号或教工号
+    private Integer id;
 
-    private String name;//姓名
-    private String password;//密码
-    private String tel;//电话号
-    private String QQ;//QQ号
-    private String email;//email
+    private String name;
 
+    private String password;
 
+    private String telephone;
+
+    private String email;
+
+    private String qq;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq == null ? null : qq.trim();
+    }
 }

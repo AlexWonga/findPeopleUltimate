@@ -1,11 +1,15 @@
 package com.j2ee.homework.findPeople.dao.impl;
 import com.j2ee.homework.findPeople.dao.personDao;
+import com.j2ee.homework.findPeople.mapper.PersonMapper;
 import com.j2ee.homework.findPeople.pojo.Person;
-import com.j2ee.homework.findPeople.utils.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
+import com.j2ee.homework.findPeople.pojo.PersonExample;
+import com.j2ee.homework.findPeople.utils.MybatisUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.hibernate.Criteria;
+
+
+//import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
@@ -13,43 +17,51 @@ import java.util.List;
  * @author wong
  */
 
-@Repository("PersonDao")
+
 public class PersonDaoImpl implements personDao {
 
     @Override
     public List<Person> getPersonList() {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = session.beginTransaction();
+
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        PersonExample personExample = new PersonExample();
+        PersonExample.Criteria criteria = personExample.createCriteria();
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         try {
-            Query<Person> query = session.createQuery("from Person");
-            List<Person> list = query.list();
-            for(Person person: list){
-                System.out.println(person.getName());
-            }
-            transaction.commit();
-            return list;
+            return mapper.selectByExample(personExample);
         }catch (Exception e){
-            transaction.rollback();
+
             e.printStackTrace();
-        }finally {
-            HibernateUtil.closeSession();
         }
         return null;
     }
 
     @Override
     public Person getPersonByName(String username) {
-        Session session = HibernateUtil.getSession();
-        String hql = "from Person where name=?";
-        Query query = session.createQuery(hql);
-        query.setParameter(0,username);
-        List<Person> list = query.list();
-        if(list.isEmpty()){
-            return null;
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        PersonExample personExample = new PersonExample();
+        PersonExample.Criteria criteria = personExample.createCriteria();
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        criteria.andNameEqualTo(username);
+        List<Person> personList = mapper.selectByExample(personExample);
+        if(!personList.isEmpty()){
+            return personList.get(0);
         } else {
-            return list.get(0);
+            return null;
         }
+
+
+
+
+
+
     }
+
+
+
+
+
+
 
 
 }
