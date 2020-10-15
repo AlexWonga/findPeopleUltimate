@@ -5,7 +5,7 @@ import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.pojo.PersonExample;
 import com.j2ee.homework.findPeople.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
-import org.hibernate.Criteria;
+
 
 
 //import org.springframework.stereotype.Repository;

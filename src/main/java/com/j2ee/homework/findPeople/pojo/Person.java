@@ -13,6 +13,8 @@ public class Person {
 
     private String qq;
 
+    private String picturepath;
+
     public Integer getId() {
         return id;
     }
@@ -59,5 +61,13 @@ public class Person {
 
     public void setQq(String qq) {
         this.qq = qq == null ? null : qq.trim();
+    }
+
+    public String getPicturepath() {
+        return picturepath;
+    }
+
+    public void setPicturepath(String picturepath) {
+        this.picturepath = picturepath == null ? null : picturepath.trim();
     }
 }

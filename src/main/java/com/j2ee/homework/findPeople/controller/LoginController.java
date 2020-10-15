@@ -2,6 +2,7 @@ package com.j2ee.homework.findPeople.controller;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.service.SearchPeople;
 import com.j2ee.homework.findPeople.service.impl.SearchPeopleImpl;
+import org.apache.catalina.session.StandardSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import com.j2ee.homework.findPeople.pojo.ResponseBody;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 @RestController
@@ -27,6 +29,7 @@ public class LoginController {
         if(Objects.isNull(person)){
             return new ResponseBody<Person>(200,"invalidPerson",null);
         } else{
+
             return new ResponseBody<Person>(200,"searchPeopleSuccess",person);
         }
     }
