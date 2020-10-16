@@ -3,11 +3,15 @@ package com.j2ee.homework.findPeople.service.impl;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.service.SearchPeople;
 import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +58,14 @@ public class SearchPeopleImpl implements SearchPeople {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean uploadFile(MultipartFile file, int userID) throws IOException {
+        PersonDaoImpl personDao = new PersonDaoImpl();
+        byte[] bytes = file.getBytes();
+        Path path = Paths.get("E://findPeopleUltimate/src/main/resources/static", file.getOriginalFilename());
+        Files.write(path, bytes);
+        return personDao.uploadPicture(path.toString(),userID);
     }
 }

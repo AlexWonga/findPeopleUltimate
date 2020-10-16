@@ -1,6 +1,7 @@
 package com.j2ee.homework.findPeople.dao;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.pojo.RegisterPerson;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -8,4 +9,5 @@ public interface personDao {
     List<Person> getPersonList();
     Person getPersonByName(String username);
 //    List<Person> searchPeople(String keyword);
+    boolean uploadPicture(String picturePath, int userID);
 }
