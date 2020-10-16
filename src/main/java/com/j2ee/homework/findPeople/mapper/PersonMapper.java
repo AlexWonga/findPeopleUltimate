@@ -4,6 +4,7 @@ import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.pojo.PersonExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface PersonMapper {
     long countByExample(PersonExample example);
@@ -15,6 +16,8 @@ public interface PersonMapper {
     int insert(Person record);
 
     int insertSelective(Person record);
+
+    List<Person> selectByExampleWithRowbounds(PersonExample example, RowBounds rowBounds);
 
     List<Person> selectByExample(PersonExample example);
 

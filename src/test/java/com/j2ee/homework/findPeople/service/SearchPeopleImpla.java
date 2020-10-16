@@ -10,7 +10,7 @@ public class SearchPeopleImpla {
     @Test
     public void search(){
         SearchPeopleImpl searchPeople = new SearchPeopleImpl();
-        List<Person> personList = searchPeople.searchPeople("sun");
+        List<Person> personList = searchPeople.searchPeople("sun",0,5);
         for(Person person:personList){
             long ID = person.getId();
             System.out.println(ID);

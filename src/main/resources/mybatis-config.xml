@@ -14,7 +14,9 @@
             </dataSource>
         </environment>
     </environments>
+
     <mappers>
         <mapper resource="mapper/PersonMapper.xml"/>
     </mappers>
+
 </configuration>

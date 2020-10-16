@@ -1,4 +1,5 @@
 package com.j2ee.homework.findPeople.controller;
+
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.service.SearchPeople;
 import com.j2ee.homework.findPeople.service.impl.SearchPeopleImpl;
@@ -23,13 +24,13 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseBody<Person> login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
         SearchPeople searchPeopleService = new SearchPeopleImpl();
-        System.out.println(username+ " " +password);
+        System.out.println(username + " " + password);
         Person person = searchPeopleService.login(username, password);
-        if(Objects.isNull(person)){
+        if (Objects.isNull(person)) {
             return new ResponseBody<>(200, "invalidPerson", null);
-        } else{
+        } else {
             HttpSession session = request.getSession();
-            if(session.isNew()) {
+            if (session.isNew()) {
                 session.setAttribute("userID", person.getId());
             }
             return new ResponseBody<>(200, "loginSuccess", person);

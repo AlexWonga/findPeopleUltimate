@@ -3,6 +3,7 @@ package com.j2ee.homework.findPeople.dao.impl;
 import com.j2ee.homework.findPeople.dao.personDao;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.utils.MybatisUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import com.j2ee.homework.findPeople.mapper.PersonMapper;
 import com.j2ee.homework.findPeople.pojo.PersonExample;
@@ -79,5 +80,31 @@ public class PersonDaoImpl implements personDao {
         }
     }
 
+    @Override
+    public List<Person> getPersonListPaging(String keyword,int offset, int limit) {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        PersonExample personExample = new PersonExample();
+        PersonExample.Criteria criteria1 = personExample.createCriteria();
+        PersonExample.Criteria criteria2 = personExample.createCriteria();
+        PersonExample.Criteria criteria3 = personExample.createCriteria();
+        PersonExample.Criteria criteria4 = personExample.createCriteria();
+        criteria1.andNameLike("%"+keyword+"%");
+        criteria2.andTelephoneLike("%"+keyword+"%");
+        criteria3.andQqLike("%"+keyword+"%");
+        criteria4.andEmailLike("%"+keyword+"%");
+        personExample.or(criteria2);
+        personExample.or(criteria3);
+        personExample.or(criteria4);
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        try {
+            RowBounds rowBounds = new RowBounds(offset, limit);
 
+            List<Person> list = mapper.selectByExampleWithRowbounds(personExample,rowBounds);
+
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -30,25 +30,12 @@ public class SearchPeopleImpl implements SearchPeople {
 //    }
 
     @Override
-    public List<Person> searchPeople(String keyword) {
+    public List<Person> searchPeople(String keyword,int offset,int limit) {
         PersonDaoImpl personDao = new PersonDaoImpl();
         if (keyword.equals("")) {
             return null;
         } else {
-            List<Person> personList = personDao.getPersonList();
-            List<Person> resultData = new ArrayList<>();
-            for (Person person : personList) {
-                long ID = person.getId();
-                String name = person.getName();
-                String tel = person.getTelephone();
-                String QQ = person.getQq();
-                String email = person.getEmail();
-                if (Long.toString(ID).contains(keyword) || name.contains(keyword) || tel.contains(keyword) || QQ.contains(keyword) || email.contains(keyword)) {
-                    resultData.add(person);
-                }
-            }
-            return resultData;
-
+            return personDao.getPersonListPaging(keyword,offset,limit);
         }
     }
 

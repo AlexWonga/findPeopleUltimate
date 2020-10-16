@@ -12,6 +12,9 @@ public class getPersonByName {
     @Test
     public void test(){
         SearchPeople searchPeople = new SearchPeopleImpl();
-        searchPeople.searchPeople("su");
+        List<Person> personList = searchPeople.searchPeople("su",0,6);
+        for(Person person:personList){
+            System.out.println(person.getName());
+        }
     }
 }

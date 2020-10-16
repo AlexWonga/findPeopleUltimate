@@ -6,6 +6,7 @@
     <classPathEntry    location="C:\Users\dell\.m2\repository\mysql\mysql-connector-java\8.0.21\mysql-connector-java-8.0.21.jar"/>
     <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
     <context id="testTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
         </commentGenerator>

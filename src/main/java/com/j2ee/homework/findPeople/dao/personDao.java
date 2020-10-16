@@ -10,4 +10,5 @@ public interface personDao {
     Person getPersonByName(String username);
 //    List<Person> searchPeople(String keyword);
     boolean uploadPicture(String picturePath, int userID);
+    List<Person> getPersonListPaging(String keyword,int offset,int limit);
 }
