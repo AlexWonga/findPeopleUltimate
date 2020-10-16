@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,8 +25,12 @@ public class SearchPeopleController {
 //    @Autowired
 //    SearchPeople searchPeopleService;
     @RequestMapping(value = "/searchPeople",method = RequestMethod.GET)
-    public ResponseBody<List<Person>> search(@RequestParam String keyword) {
+    public ResponseBody<List<Person>> search(@RequestParam String keyword, HttpServletRequest request) {
         System.out.println(keyword);
+        HttpSession session = request.getSession();
+        if(session.isNew()){
+            return new ResponseBody<>(400, "uploadFalse", null);
+        }
         SearchPeople searchPeopleService = new SearchPeopleImpl();
         List<Person> list = searchPeopleService.searchPeople(keyword);
         if(Objects.isNull(list)) {

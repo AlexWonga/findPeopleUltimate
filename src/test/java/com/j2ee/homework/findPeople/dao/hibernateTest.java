@@ -1,4 +1,5 @@
 package com.j2ee.homework.findPeople.dao;
+import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -37,12 +38,17 @@ public class hibernateTest {
 //        }finally {
 //            HibernateUtil.closeSession();
 //        }
-        SqlSession sqlSession = MybatisUtils.getSqlSession();
-        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
-        PersonExample example = new PersonExample();
-        PersonExample.Criteria criteria = example.createCriteria();
-        criteria.andNameEqualTo("sun");
-        List<Person> list = mapper.selectByExample(example);
+//        SqlSession sqlSession = MybatisUtils.getSqlSession();
+//        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+//        PersonExample example = new PersonExample();
+//        PersonExample.Criteria criteria = example.createCriteria();
+//        criteria.andNameEqualTo("sun");
+//        List<Person> list = mapper.selectByExample(example);
+//        for(Person person:list){
+//            System.out.println(person.getName());
+//        }
+        PersonDaoImpl personDao = new PersonDaoImpl();
+        List<Person> list = personDao.getPersonList();
         for(Person person:list){
             System.out.println(person.getName());
         }

@@ -13,4 +13,5 @@ public interface SearchPeople {
     List<Person> searchPeople(String keyword);
     Person login(String username,String password);
     boolean uploadFile(MultipartFile file,int userID) throws IOException;
+    List<Person> searchPeopleByPicture(MultipartFile file) throws IOException;
 }

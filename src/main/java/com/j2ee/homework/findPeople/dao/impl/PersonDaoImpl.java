@@ -25,10 +25,8 @@ public class PersonDaoImpl implements personDao {
         PersonExample personExample = new PersonExample();
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         try {
-            sqlSession.close();
             return mapper.selectByExample(personExample);
         } catch (Exception e) {
-
             e.printStackTrace();
         }
         return null;
@@ -46,7 +44,6 @@ public class PersonDaoImpl implements personDao {
             sqlSession.close();
             return personList.get(0);
         } else {
-            sqlSession.close();
             return null;
         }
 
@@ -75,7 +72,6 @@ public class PersonDaoImpl implements personDao {
                 }
                 sqlSession.commit();
             }
-            sqlSession.close();
             return true;
         }catch (Exception e){
             e.printStackTrace();
