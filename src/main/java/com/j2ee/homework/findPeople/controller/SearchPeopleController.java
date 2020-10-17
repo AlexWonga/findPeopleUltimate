@@ -1,7 +1,6 @@
 package com.j2ee.homework.findPeople.controller;
 
 
-import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
 import com.j2ee.homework.findPeople.pojo.Person;
 import com.j2ee.homework.findPeople.pojo.ResponseBody;
 import com.j2ee.homework.findPeople.service.SearchPeople;

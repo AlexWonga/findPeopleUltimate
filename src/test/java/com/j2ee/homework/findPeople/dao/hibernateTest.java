@@ -1,12 +1,10 @@
 package com.j2ee.homework.findPeople.dao;
 import com.j2ee.homework.findPeople.dao.impl.PersonDaoImpl;
 import com.j2ee.homework.findPeople.pojo.Person;
-import com.j2ee.homework.findPeople.utils.MybatisUtils;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
-import com.j2ee.homework.findPeople.mapper.PersonMapper;
+
 import java.util.List;
-import com.j2ee.homework.findPeople.pojo.PersonExample;
+
 public class hibernateTest {
     @Test
     public void testInsert(){

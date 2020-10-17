@@ -1,7 +1,6 @@
 package com.j2ee.homework.findPeople.dao;
+
 import com.j2ee.homework.findPeople.pojo.Person;
-import com.j2ee.homework.findPeople.pojo.RegisterPerson;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

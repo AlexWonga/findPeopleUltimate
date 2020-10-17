@@ -1,12 +1,12 @@
 package com.j2ee.homework.findPeople.dao.impl;
 
 import com.j2ee.homework.findPeople.dao.personDao;
+import com.j2ee.homework.findPeople.mapper.PersonMapper;
 import com.j2ee.homework.findPeople.pojo.Person;
+import com.j2ee.homework.findPeople.pojo.PersonExample;
 import com.j2ee.homework.findPeople.utils.MybatisUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import com.j2ee.homework.findPeople.mapper.PersonMapper;
-import com.j2ee.homework.findPeople.pojo.PersonExample;
 
 
 import java.io.File;
