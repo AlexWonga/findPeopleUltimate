@@ -42,6 +42,9 @@ public class SearchPeopleImpl implements SearchPeople {
     public Person login(String username, String password) {
         PersonDaoImpl personDao = new PersonDaoImpl();
         Person person = personDao.getPersonByName(username);
+        if(Objects.isNull(person)){
+            return null;
+        }
         if (person.getPassword().equals(password)) {
             return person;
         } else {

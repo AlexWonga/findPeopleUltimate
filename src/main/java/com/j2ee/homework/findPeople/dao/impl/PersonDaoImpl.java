@@ -19,6 +19,7 @@ import java.util.List;
 
 public class PersonDaoImpl implements personDao {
 
+
     @Override
     public List<Person> getPersonList() {
 
@@ -99,12 +100,67 @@ public class PersonDaoImpl implements personDao {
         try {
             RowBounds rowBounds = new RowBounds(offset, limit);
 
-            List<Person> list = mapper.selectByExampleWithRowbounds(personExample,rowBounds);
-
-            return list;
+            return mapper.selectByExampleWithRowbounds(personExample,rowBounds);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public Person getPersonByID(int userID) {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        PersonExample personExample = new PersonExample();
+        PersonExample.Criteria criteria = personExample.createCriteria();
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        criteria.andIdEqualTo(userID);
+        List<Person> personList = mapper.selectByExample(personExample);
+        if(personList.isEmpty()){
+            return null;
+        } else {
+            return personList.get(0);
+        }
+    }
+
+    @Override
+    public boolean addPerson(Person person) {
+        try{
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+        mapper.insert(person);
+        sqlSession.commit();
+        return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deletePerson(int userID) {
+        try {
+            SqlSession sqlSession = MybatisUtils.getSqlSession();
+            PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+            mapper.deleteByPrimaryKey(userID);
+            sqlSession.commit();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean modifyPerson(Person person) {
+        try{
+            SqlSession sqlSession = MybatisUtils.getSqlSession();
+            PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
+            mapper.updateByPrimaryKey(person);
+            sqlSession.commit();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();;
+            return false;
+        }
     }
 }

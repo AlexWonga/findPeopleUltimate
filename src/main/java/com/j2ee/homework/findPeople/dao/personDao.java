@@ -10,4 +10,8 @@ public interface personDao {
 //    List<Person> searchPeople(String keyword);
     boolean uploadPicture(String picturePath, int userID);
     List<Person> getPersonListPaging(String keyword,int offset,int limit);
+    Person getPersonByID(int userID);
+    boolean addPerson(Person person);
+    boolean deletePerson(int userID);
+    boolean modifyPerson(Person person);
 }

@@ -17,20 +17,20 @@ import java.nio.file.Paths;
 
 @RestController
 
-public class UploadPicture {
+public class UploadPictureController {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public ResponseBody<Void> uploadPicture(@RequestParam MultipartFile file, HttpServletRequest request) {
         if (file.isEmpty()) {
             return new ResponseBody<>(400, "uploadFalse", null);
         }
         try {
-//            HttpSession session = request.getSession();
-//            if(session.isNew()) {
-//                return new ResponseBody<>(400,"invalidUser",null);
-//            }
-//            int userID = (int) session.getAttribute("userID");
+            HttpSession session = request.getSession();
+            if(session.isNew()) {
+                return new ResponseBody<>(400,"invalidUser",null);
+            }
+            int userID = (int) session.getAttribute("userID");
             SearchPeopleImpl searchPeopleService = new SearchPeopleImpl();
-            boolean flag = searchPeopleService.uploadFile(file,101);
+            boolean flag = searchPeopleService.uploadFile(file,userID);
             if(flag)
             return new ResponseBody<>(200, "uploadSuccess", null);
             else {

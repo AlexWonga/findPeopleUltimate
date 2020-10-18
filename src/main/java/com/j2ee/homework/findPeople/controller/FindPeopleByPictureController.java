@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-public class FindPeopleByPicture {
+public class FindPeopleByPictureController {
     @RequestMapping(value = "/findPeopleByPicture", method = RequestMethod.POST)
     public ResponseBody<List<Person>> findPeopleByPicture(@RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
         HttpSession session = request.getSession();

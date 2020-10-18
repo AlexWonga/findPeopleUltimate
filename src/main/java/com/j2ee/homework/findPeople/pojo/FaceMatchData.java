@@ -47,7 +47,7 @@ public class FaceMatchData {
         this.liveness_control = liveness_control;
     }
 
-    public FaceMatchData(String image, String image_type){
+    public FaceMatchData(String image, String image_type) {
         super();
         this.image = image;
         this.image_type = image_type;
