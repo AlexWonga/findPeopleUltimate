@@ -22,7 +22,7 @@ public class LoginController {
 //    private SearchPeople searchPeopleService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseBody<Person> login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
+    public ResponseBody<Person> login(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
         SearchPeople searchPeopleService = new SearchPeopleImpl();
         System.out.println(username + " " + password);
         Person person = searchPeopleService.login(username, password);
@@ -30,9 +30,11 @@ public class LoginController {
             return new ResponseBody<>(200, "invalidPerson", null);
         } else {
             HttpSession session = request.getSession();
-            if (session.isNew()) {
-                session.setAttribute("userID", person.getId());
-            }
+            System.out.println(person.getId());
+            session.setAttribute("userID", person.getId());
+            int userID = (int) session.getAttribute("userID");
+            System.out.println(userID);
+            session.setMaxInactiveInterval(6000);
             return new ResponseBody<>(200, "loginSuccess", person);
         }
     }

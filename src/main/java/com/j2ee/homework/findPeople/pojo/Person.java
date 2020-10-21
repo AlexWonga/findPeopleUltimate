@@ -18,6 +18,25 @@ public class Person {
 
     private String usertype;
 
+    public Person(Integer id, String name, String password, String telephone, String email, String qq, String usertype) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.telephone = telephone;
+        this.email = email;
+        this.qq = qq;
+        this.usertype = usertype;
+    }
+
+    public Person(String name, String password, String telephone, String email, String qq, String usertype) {
+        this.name = name;
+        this.password = password;
+        this.telephone = telephone;
+        this.email = email;
+        this.qq = qq;
+        this.usertype = usertype;
+    }
+
     public Person(Integer id, String name, String password, String telephone, String email, String qq, String picturepath, String usertype) {
         this.id = id;
         this.name = name;

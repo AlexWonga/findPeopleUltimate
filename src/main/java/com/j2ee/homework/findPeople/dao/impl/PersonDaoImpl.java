@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author wong
@@ -55,6 +56,7 @@ public class PersonDaoImpl implements personDao {
     @Override
     public boolean uploadPicture(String picturePath, int userID) {
         try {
+            System.out.println(picturePath);
             SqlSession sqlSession = MybatisUtils.getSqlSession();
             PersonExample personExample = new PersonExample();
             PersonExample.Criteria criteria = personExample.createCriteria();
@@ -63,18 +65,26 @@ public class PersonDaoImpl implements personDao {
             List<Person> personList = mapper.selectByExample(personExample);
             if (!personList.isEmpty()) {
                 Person person = personList.get(0);
-                if(!person.getPicturepath().equals(picturePath)) {
+                System.out.println(person.getId());
+                if(!Objects.isNull(person.getPicturepath()) && !person.getPicturepath().equals(picturePath)) {
                     File file = new File(person.getPicturepath());
                     boolean flag = file.delete();
                     if(!flag){
                         return false;
                     }
+                    System.out.println(picturePath);
                     person.setPicturepath(picturePath);
                     mapper.updateByExample(person, personExample);
+                    sqlSession.commit();
+                    return true;
+                } else {
+                    person.setPicturepath(picturePath);
+                    mapper.updateByExample(person, personExample);
+                    sqlSession.commit();
+                    return true;
                 }
-                sqlSession.commit();
             }
-            return true;
+            return false;
         }catch (Exception e){
             e.printStackTrace();
             return false;

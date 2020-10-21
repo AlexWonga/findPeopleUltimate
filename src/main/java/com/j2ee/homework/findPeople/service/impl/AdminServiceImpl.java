@@ -15,7 +15,7 @@ public class AdminServiceImpl implements AdminService {
         if (Objects.isNull(admin) || !(admin.getUsertype().equals("ADMIN"))) {
             return false;
         } else {
-            Person person = new Person(username,password,telephone,email,QQ);
+            Person person = new Person(username,password,telephone,email,QQ,"NORMAL");
             return personDao.addPerson(person);
 
         }
@@ -39,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
         if (Objects.isNull(admin) || !(admin.getUsertype().equals("ADMIN"))) {
             return false;
         } else {
-            Person person = new Person(userID,username,password,telephone,email,QQ);
+            Person person = new Person(userID,username,password,telephone,email,QQ,"NORMAL");
             return personDao.modifyPerson(person);
         }
     }
